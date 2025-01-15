@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         std::cout   << "episilon2: ";
         std::cin    >> episilon2;
     }
-    if (argc == 2) {
+    else if (argc == 2) {
         if (std::strcmp(argv[1],"--help")==0){
             std::cout << "\nCalculadora de zeros de raízes\n";
             std::cout << "------------------------------\n";
@@ -36,23 +36,20 @@ int main(int argc, char* argv[]) {
         else {
             std::cout << "Utilize a flag --help para saber o comando correto de inserção por linha de comando.\n";
         }
+        return 1;
     }
     else {
         // "atof" function transform char variables to double
-        x0 = stod(argv[1]);
-        x1 = stod(argv[2]);
-        a = stod(argv[3]);
-        episilon1 = stod(argv[4]);
-        episilon2 = stod(argv[5]);
-
-        // Saving the funcion results
-        pair<double, map<int, vector<double>>> nr = newton_raphson(func, derivative, x0, a, episilon1, episilon2);
-        pair<double, map<int, vector<double>>> nm = newtonModified(func, derivative, x0, a, episilon1, episilon2);
-        pair<double, map<int, vector<double>>> sc = secant(func, x0, x1, a, episilon1, episilon2);
-
-        // TODO: Update csv data
-        std::string scriptLibreOffice = "interface_final.ods"; 
-        openLO(scriptLibreOffice);
+        x0 = atof(argv[1]);
+        x1 = atof(argv[2]);
+        a = atof(argv[3]);
+        episilon1 = atof(argv[4]);
+        episilon2 = atof(argv[5]);
     }
+    pair<double, map<int, vector<double>>> nr = newton_raphson(func, derivative, x0, a, episilon1, episilon2);
+    pair<double, map<int, vector<double>>> nm = newtonModified(func, derivative, x0, a, episilon1, episilon2);
+    pair<double, map<int, vector<double>>> sc = secant(func, x0, x1, a, episilon1, episilon2);
+    std::string scriptLibreOffice = "interface_final.ods"; 
+    openLO(scriptLibreOffice);
     return 0;
 }
