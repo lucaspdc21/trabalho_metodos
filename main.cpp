@@ -5,22 +5,11 @@
 #include <map>
 #include <cstdlib>
 #include <cstring>
-#include <typeinfo>
 #include "headers/function.hpp"
 #include "headers/newton_raphson.hpp"
 #include "headers/newton_raphson_modified.hpp"
 #include "headers/secant.hpp"
-void openLO(const std::string& scriptPath) {
-    // erro: Warning: failed to launch javaldx - java may not function correctly
-    // TODO: procuarar uma solução para o erro acima
-    std::string comando = "libreoffice --calc " + scriptPath + " &";
-    int retorno = system(comando.c_str());
-    if (retorno == 0) {
-        std::cout << "LibreOffice Calc aberto com sucesso.\n";
-    } else {
-        std::cerr << "Erro ao abrir o LibreOffice Calc.\n";
-    }
-}
+#include "headers/csv_functions.hpp"
 int main(int argc, char* argv[]) {
     double x0,x1,a,episilon1,episilon2;
     // --help flag (could be done better, but this will work)
