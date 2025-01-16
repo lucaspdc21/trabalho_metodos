@@ -9,7 +9,7 @@
 using namespace std;
 
 
-pair<double, map<int, vector<double>>> newtonModified(double (*f) (double, double), double (*df) (double, double), double a, double x0, double epsilon1,double epsilon2) {   
+pair<double, map<int, vector<double>>> newtonModified(double (*f) (double, double), double (*df) (double, double), double x0, double a, double epsilon1,double epsilon2) {   
     map<int, vector<double>> Map_NR_mod;
     int iter = 0;
     Map_NR_mod.insert(
