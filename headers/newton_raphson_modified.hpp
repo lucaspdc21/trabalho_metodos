@@ -16,9 +16,14 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
     std::cout << "newtonModified\n";
     map<int, vector<double>> Map_NR_mod;
     int iter = 0;
+    double dx0 = derivative(x0,a);
+    if (dx0 == 0){
+      //se derivada == 0, metodo para. 
+      return make_pair(NULL, Map_NR_mod); 
+    }
     Map_NR_mod.insert(
-      pair<int, vector<double>>(iter, {x0, func(x0, a), derivative(x0,a), x0}));
-    double Dx0 = 1 / derivative(x0,a); // esta é a diferença deste método para o método de newton_raphson normal
+      pair<int, vector<double>>(iter, {x0, func(x0, a), dx0, x0}));
+    double Dx0 = 1 / dx0; // esta é a diferença deste método para o método de newton_raphson normal
     //ou seja, a função de iteração é somente x - f(x)/f'(x0) ao invés de ser x - f(x)/f'(x)
     if (abs(func(x0,a))< epsilon1){    
         return make_pair(x0, Map_NR_mod);
@@ -30,7 +35,7 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
         double fx = func(x0,a); //calculando funcao no ponto 
         x = x0 - fx * Dx0; 
         double er = abs(x - x0) / abs(x0); // calculando o erro relativo
-        Map_NR_mod.insert(pair<int, vector<double>>(iter, {x0, a, fx, Dx0, er})); // inserindo esses valores no mapa
+        Map_NR_mod.insert(pair<int, vector<double>>(iter, {x0, a, fx, dx0, er})); // inserindo esses valores no mapa
         if ((abs(func(x,a)) < epsilon1) || (x-x0 > epsilon2) || (iter >= iterMax) )
                 return make_pair(x, Map_NR_mod);
         x0 = x; // se ainda não paramos, continuamos e atualizamos o valor de x0 para a nova raiz aproximada
