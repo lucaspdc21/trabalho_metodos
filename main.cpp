@@ -47,9 +47,10 @@ int main(int argc, char* argv[]) {
         episilon2 = atof(argv[5]);
     }
     pair<double, map<int, vector<double>>> nr = newton_raphson(func, derivative, x0, a, episilon1, episilon2);
+    to_csv(nr,"newton_raphson");
     pair<double, map<int, vector<double>>> nm = newtonModified(func, derivative, x0, a, episilon1, episilon2);
     pair<double, map<int, vector<double>>> sc = secant(func, x0, x1, a, episilon1, episilon2);
     std::string scriptLibreOffice = "interface_final.ods"; 
-    openLO(scriptLibreOffice);
+    //openLO(scriptLibreOffice);
     return 0;
 }
