@@ -25,7 +25,7 @@ pair<double, map<int, vector<double>>> newton_raphson (double (*f) (double, doub
     while (1){
         iter++;
         fx0 = f(x0, a); //calculando funcao no ponto 
-        fpx0 = f(x0, a); //calculando derivada da funcao no ponto
+        fpx0 = df(x0, a); //calculando derivada da funcao no ponto
         x = x0 - fx0/fpx0;  // calculando a raiz aproximada
         er = abs(x - x0) / abs(x0); // calculando o erro relativo
         fx = f(x,a); 
