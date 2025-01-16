@@ -11,18 +11,19 @@ void vec_to_file (std::vector<double> v,FILE* f){
 	}
 	fprintf(f, "\n");
 }
-void to_csv(const pair<double,std::map<int, std::vector<double>>> p,std::string title = "example"){
+void to_csv(const pair<double,std::map<int, std::vector<double>>> p,const char* header_csv_method,std::string title = "example"){
 	time_t timestamp;
 	std::string name_file = "arquivos_csv/" + std::to_string(time(&timestamp)) + "_" + title + ".csv";
+	std::cout << "File name: " << name_file << '\n';
 	std::FILE* csv_file = std::fopen(name_file.c_str(),"w+");
 	std::map func_map = std::get<1>(p);
-	fprintf(csv_file, "número da iteração , raiz atual , raiz anterior , error relativo , f(x) , f'(x)\n");
+	fprintf(csv_file,header_csv_method);
 	for (const auto&[key,vec] : func_map){
 		fprintf(csv_file, "%i,",key);
 		vec_to_file(vec,csv_file);
 		//printf("%i , %f, %f, %f, %f, %f\n",n,vec[1],vec[2],vec[3],vec[4],vec[5]);
 	}
-	fprintf(csv_file,"%f",std::get<0>(p));
+	fprintf(csv_file,"\nRaiz Final: ,%f",std::get<0>(p));
 	std::fclose(csv_file);
 }
 void openLO(const std::string& scriptPath) {
