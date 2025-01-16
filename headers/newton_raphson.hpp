@@ -26,7 +26,7 @@ pair<double, map<int, vector<double>>> newton_raphson ( double (*func) (double,d
         double fpx = derivative(x0, a); //calculando derivada da funcao no ponto
         if (fpx == 0){
           // se a derivada for zero, o metodo para!
-          return make_pair(null, MAP_NR); 
+          return make_pair(NULL, Map_NR); 
         }
         double x = x0 - fx/fpx;  // calculando a raiz aproximada
         double er = abs(x - x0) / abs(x0); // calculando o erro relativo
