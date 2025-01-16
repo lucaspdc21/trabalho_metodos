@@ -49,10 +49,13 @@ int main(int argc, char* argv[]) {
     const char* header_nr = "iteração,raiz atual (x), f(x) ,raiz anterior (x-1), f(x-1) , f'(x-1), erro relativo\n";
     pair<double, map<int, vector<double>>> nr = newton_raphson(func, derivative, x0, a, episilon1, episilon2);
     to_csv(nr,header_nr,"newton_raphson");
-    pair<double, map<int, vector<double>>> nm = newtonModified(func, derivative, x0, a, episilon1, episilon2);
     const char* header_nm = "iteração, raiz atual (x),f(x),raiz anterior(x-1),f(x-1),d(x-1),erro relativo \n";
+    pair<double, map<int, vector<double>>> nm = newtonModified(func, derivative, x0, a, episilon1, episilon2);
     to_csv(nm,header_nm,"newton_raphson_modified");
+    // pair<int, vector<double>>(iter, {x0,fx0,x1, fx1, erro_relativo}));
+    const char* header_sc = "iteração, x0, f(x0) , x1, f(x1), erro relativo \n";
     pair<double, map<int, vector<double>>> sc = secant(func, x0, x1, a, episilon1, episilon2);
+    to_csv(sc,header_sc,"secant");
     std::string scriptLibreOffice = "interface_final.ods"; 
     //openLO(scriptLibreOffice);
     return 0;
