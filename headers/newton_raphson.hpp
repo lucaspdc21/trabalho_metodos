@@ -23,7 +23,7 @@ pair<double, map<int, vector<double>>> newton_raphson ( double (*func) (double,d
     while (1){
         iter++;
         double fx = func(x0, a); //calculando funcao no ponto 
-        double fpx = func(x0, a); //calculando derivada da funcao no ponto
+        double fpx = derivative(x0, a); //calculando derivada da funcao no ponto
         double x = x0 - fx/fpx;  // calculando a raiz aproximada
         double er = abs(x - x0) / abs(x0); // calculando o erro relativo
         Map_NR.insert(pair<int, vector<double>>(iter, {x0, a, fx, fpx, er})); // inserindo esses valores no mapa
