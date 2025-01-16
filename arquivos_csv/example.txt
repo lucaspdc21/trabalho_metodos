@@ -1,0 +1,1 @@
+iteração,x0, a , f(x) , f'(x), erro relativo\n

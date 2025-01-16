@@ -6,8 +6,9 @@
 #define constA          1.0
 #define iterMax         10000
 using namespace std;
-pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, double), double (*derivative) (double, double), double a, double x0, double epsilon1,double epsilon2)
+pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, double), double (*derivative) (double, double), double x0, double a, double epsilon1,double epsilon2)
 {   
+    std::cout << "newtonModified\n";
     map<int, vector<double>> Map_NR_mod;
     int iter = 0;
     Map_NR_mod.insert(
