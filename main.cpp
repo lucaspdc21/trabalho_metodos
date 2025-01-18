@@ -59,6 +59,6 @@ int main(int argc, char* argv[]) {
     pair<double, map<int, vector<double>>> sc = secant(func, x0, x1, a, episilon1, episilon2);
     to_csv(sc,header_sc,"secant");
     std::string scriptLibreOffice = "interface_final.ods"; 
-    //openLO(scriptLibreOffice);
+    openLO(scriptLibreOffice);
     return 0;
 }
