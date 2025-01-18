@@ -8,8 +8,8 @@
 using namespace std;
 pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, double), 
                                                               double (*derivative) (double, double), 
-                                                              double x0, 
                                                               double a, 
+                                                              double x0,
                                                               double epsilon1,
                                                               double epsilon2)
 {   
