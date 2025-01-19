@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <vector>
+#include <iomanip> // formatação de saída
 #include "headers/function.hpp"
 #include "headers/newton_raphson.hpp"
 #include "headers/newton_raphson_modified.hpp"
@@ -28,10 +29,11 @@ struct Result {
 // Printa resultados individuais
 void printResults(const std::string& method, const std::pair<double, std::map<int, std::vector<double>>>& results) {
     std::cout << "Resultados do método " << method << ":\n";
+    std::cout << std::setw(10) << "  Iteração" << std::setw(15) << "x0" << std::setw(15) << "a" << std::setw(15) << "f(x)" << std::setw(15) << "f'(x)" << std::setw(16) << "Erro Relativo\n"; // Adiciona o cabeçalho
     for (const auto& [iter, values] : results.second) {
-        std::cout << "Iteração " << iter << ": ";
+        std::cout << std::setw(10) << iter;
         for (const auto& value : values) {
-            std::cout << value << " ";
+            std::cout << std::setw(15) << value;
         }
         std::cout << "\n";
     }
@@ -41,9 +43,9 @@ void printResults(const std::string& method, const std::pair<double, std::map<in
 // Printa o quadro comparativo
 void printComparison(const std::vector<Result>& comparisons) {
     std::cout << "Quadro Comparativo:\n";
-    std::cout << "Método\t\ta\tRaiz Final\tf(x)\tErro em x\tIterações\n";
+    std::cout << std::setw(30) << "Método" << std::setw(10) << "a" << std::setw(15) << "Raiz Final" << std::setw(15) << "f(x)" << std::setw(15) << "Erro em x" << std::setw(18) << "Iterações\n";
     for (const auto& result : comparisons) {
-        std::cout << result.method << "\t" << result.a << "\t" << result.r_final << "\t" << result.fx << "\t" << result.error << "\t" << result.iterations << "\n";
+        std::cout << std::setw(29) << result.method << std::setw(10) << result.a << std::setw(15) << result.r_final << std::setw(15) << result.fx << std::setw(15) << result.error << std::setw(15) << result.iterations << "\n";
     }
 }
 
