@@ -18,7 +18,7 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
     double dx0 = derivative(x0,a);
     if (dx0 == 0){
       //se derivada == 0, metodo para. 
-      return make_pair(-404.404404404, Map_NR_mod); 
+      return make_pair(NULL, Map_NR_mod); 
     }
     Map_NR_mod.insert(
       pair<int, vector<double>>(iter, {x0, func(x0, a), dx0, x0}));
