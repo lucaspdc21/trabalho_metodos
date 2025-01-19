@@ -20,11 +20,15 @@ struct Result {
 // Printa resultados individuais
 void printResults(const std::string& method, double a, const std::pair<double, std::map<int, std::vector<double>>>& results) {
     std::cout << "Resultados do método " << method << " para a = " << a << ":\n";
-    std::cout << std::setw(10) << "  Iteração" << std::setw(15) << "x0" << std::setw(15) << "f(x)" << std::setw(15) << "f'(x)" << std::setw(16) << "Erro Relativo\n"; // Adiciona o cabeçalho
+    if (method == "Secante") {
+        std::cout << std::setw(10) << "  Iteração" << std::setw(15) << "x0" << std::setw(15) << "f(x0)" << std::setw(15) << "x1" << std::setw(15) << "f(x1)" << std::setw(16) << "Erro Relativo\n"; // Adiciona o cabeçalho
+    } else {
+        std::cout << std::setw(10) << "  Iteração" << std::setw(15) << "x0" << std::setw(15) << "f(x)" << std::setw(15) << "f'(x)" << std::setw(16) << "Erro Relativo\n"; // Adiciona o cabeçalho
+    }
     for (const auto& [iter, values] : results.second) {
         std::cout << std::setw(10) << iter;
         for (size_t i = 0; i < values.size(); ++i) {
-            if (i != 1) { // Ignora a coluna 'a'
+            if (method == "Secante" || i != 1) { // Ignora a coluna 'a' para métodos que não são Secante
                 std::cout << std::setw(15) << values[i];
             }
         }
