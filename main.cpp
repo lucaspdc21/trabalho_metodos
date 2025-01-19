@@ -22,12 +22,33 @@ int main(int argc, char* argv[]) {
     std::vector<double> a_values;
 
     // --help flag (could be done better, but this will work)
-    if (argc < 2) {
+    if (argc <= 2) {
+        if (argc == 2) {
+            if (std::strcmp(argv[1], "--help") == 0) {
+                std::cout << "\nCalculadora de zeros de raízes\n";
+                std::cout << "------------------------------\n";
+                std::cout << "Modo input\n";
+                std::cout << "./main.out\n";
+                std::cout << "Caso deseje inserir os dados iniciais, utilize a flag -x\n";
+                std::cout << "Exemplo: ./main.out -x\n\n";
+                std::cout << "Modo argumento de terminal\n";
+                std::cout << "./main <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n";
+                std::cout << "Utilize a flag -x para dar como entrada aproximações iniciais\n";
+                std::cout << "Exemplo:./main -x <x0> <x1> <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n\n";
+                return 0;
+            } else if (std::strcmp(argv[1], "-x") == 0) {
+                isolamento = false;
+                std::cout << "x0: ";
+                std::cin >> x0;
+                std::cout << "x1: ";
+                std::cin >> x1;
+            } else {
+                std::cout << "Utilize a flag --help para saber o comando correto de inserção por linha de comando.\n";
+                return 1;
+            }
+        }
+
         std::cout << "Input Mode \n" << " \"Use ./main --help\" para utilizar o modo de input direto da linha de comando\n\n";
-        std::cout << "x0: ";
-        std::cin >> x0;
-        std::cout << "x1: ";
-        std::cin >> x1;
         std::cout << "episilon1: ";
         std::cin >> episilon1;
         std::cout << "episilon2: ";
@@ -39,18 +60,6 @@ int main(int argc, char* argv[]) {
             std::cout << "a[" << i << "]: ";
             std::cin >> a_values[i];
         }
-    } else if (argc == 2) {
-        if (std::strcmp(argv[1], "--help") == 0) {
-            std::cout << "\nCalculadora de zeros de raízes\n";
-            std::cout << "------------------------------\n";
-            std::cout << "Comando correto\n";
-            std::cout << "./main <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n\n";
-            std::cout << "Utilize a flag -x para dar como entrada aproximações iniciais\n";
-            std::cout << "Exemplo:./main -x <x0> <x1> <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n\n";
-        } else {
-            std::cout << "Utilize a flag --help para saber o comando correto de inserção por linha de comando.\n";
-        }
-        return 1;
     } else {
         int ent = 0;
         if (std::strcmp(argv[1],"-x") == 0) {
@@ -73,7 +82,7 @@ int main(int argc, char* argv[]) {
 
     for (double a : a_values) {
         if (isolamento) {
-            pair <double, double> aprox = Bisseccao (func, a, -10, 5, 1, 0);
+            pair <double, double> aprox = Bisseccao (func, a, -80, 5, 1, 0);
             x0 = aprox.first;
             x1 = aprox.second;
         }
