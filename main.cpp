@@ -18,7 +18,7 @@
 int main(int argc, char* argv[]) {
     double x0, x1, episilon1, episilon2;
     int n;
-    bool isolamento = false;
+    bool isolamento = true;
     std::vector<double> a_values;
 
     // --help flag (could be done better, but this will work)
@@ -55,9 +55,9 @@ int main(int argc, char* argv[]) {
         int ent = 0;
         if (std::strcmp(argv[1],"-x") == 0) {
             isolamento = false;
-            ent = 2;
-            x0 = atof(argv[1]);
-            x1 = atof(argv[2]);
+            ent = 3;
+            x0 = atof(argv[2]);
+            x1 = atof(argv[3]);
         }
         episilon1 = atof(argv[ent + 1]);
         episilon2 = atof(argv[ent + 2]);
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
 
     for (double a : a_values) {
         if (isolamento) {
-            pair <double, double> aprox = Bisseccao (func, a, -100, 5, 1, 0);
+            pair <double, double> aprox = Bisseccao (func, a, -10, 5, 1, 0);
             x0 = aprox.first;
             x1 = aprox.second;
         }
