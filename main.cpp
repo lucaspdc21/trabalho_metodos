@@ -13,10 +13,12 @@
 #include "headers/secant.hpp"
 #include "headers/csv_functions.hpp"
 #include "headers/outputFunctions.hpp"
+#include "headers/isolamento_automatico.hpp"
 
 int main(int argc, char* argv[]) {
     double x0, x1, episilon1, episilon2;
     int n;
+    bool isolamento = false;
     std::vector<double> a_values;
 
     // --help flag (could be done better, but this will work)
@@ -42,21 +44,27 @@ int main(int argc, char* argv[]) {
             std::cout << "\nCalculadora de zeros de raízes\n";
             std::cout << "------------------------------\n";
             std::cout << "Comando correto\n";
-            std::cout << "./main <x0> <x1> <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n\n";
+            std::cout << "./main <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n\n";
+            std::cout << "Utilize a flag -x para dar como entrada aproximações iniciais\n";
+            std::cout << "Exemplo:./main -x <x0> <x1> <episilon1> <episilon2> <n> <a1> <a2> ... <an>\n\n";
         } else {
             std::cout << "Utilize a flag --help para saber o comando correto de inserção por linha de comando.\n";
         }
         return 1;
     } else {
-        // "atof" function transform char variables to double
-        x0 = atof(argv[1]);
-        x1 = atof(argv[2]);
-        episilon1 = atof(argv[3]);
-        episilon2 = atof(argv[4]);
-        n = atoi(argv[5]);
+        int ent = 0;
+        if (std::strcmp(argv[1],"-x") == 0) {
+            isolamento = false;
+            ent = 2;
+            x0 = atof(argv[1]);
+            x1 = atof(argv[2]);
+        }
+        episilon1 = atof(argv[ent + 1]);
+        episilon2 = atof(argv[ent + 2]);
+        n = atoi(argv[ent + 3]);
         a_values.resize(n);
         for (int i = 0; i < n; ++i) {
-            a_values[i] = atof(argv[6 + i]);
+            a_values[i] = atof(argv[ent + 4 + i]);
         }
     }
 
@@ -64,6 +72,12 @@ int main(int argc, char* argv[]) {
     std::vector<Result> comparisons;
 
     for (double a : a_values) {
+        if (isolamento) {
+            pair <double, double> aprox = Bisseccao (func, a, -100, 5, 1, 0);
+            x0 = aprox.first;
+            x1 = aprox.second;
+        }
+
         const char* header_nr = "iteração,x0, a , f(x) , f'(x), erro relativo\n";
         pair<double, map<int, vector<double>>> nr = newton_raphson(func, derivative, x0, a, episilon1, episilon2);
         to_csv(nr, header_nr, "newton_raphson_a_" + std::to_string(a));
