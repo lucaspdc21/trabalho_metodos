@@ -31,7 +31,7 @@ pair<double, map<int, vector<double>>> newton_raphson ( double (*func) (double,d
         double x = x0 - fx/fpx;  // calculando a raiz aproximada
         double er = abs(x - x0) / abs(x0); // calculando o erro relativo
         Map_NR.insert(pair<int, vector<double>>(iter, {x0, a, fx, fpx, er})); // inserindo esses valores no mapa
-        if (abs(func(x,a)) < episilon1 || abs(x - x0) < episilon2 || iter > MAX_ITER){ // condições de parada 
+        if (abs(func(x,a)) < episilon1 || er < episilon2 || iter > MAX_ITER){ // condições de parada 
             return make_pair(x, Map_NR);
         }   
         x0 = x; // se ainda não paramos, continuamos e atualizamos o valor de x0 para a nova raiz aproximada

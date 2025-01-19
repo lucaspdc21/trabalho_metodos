@@ -30,10 +30,10 @@ pair<double, map<int, vector<double>>> secant ( double (*func) (double,double),
         x2 = (x0*fx1 - x1*fx0)/(fx1 - fx0); //mudei pra formula do livro só porque... sim? acho ela mais entendível. 
         double absDif = abs(x2-x1);
         double funcx2 = func(x2, a);
-        double erro_relativo = abs(x1 - x0) / abs(x1);
+        double er = abs(x2 - x1) / abs(x2);
         Map_SEC.insert(
-        pair<int, vector<double>>(iter, {x0,fx0,x1, fx1, erro_relativo}));
-        if (((abs(funcx2))<episilon1)||(absDif<episilon2)||(iter>=MAX_ITER)){
+        pair<int, vector<double>>(iter, {x0,fx0,x1, fx1, er}));
+        if (((abs(funcx2))<episilon1)||(er<episilon2)||(iter>=MAX_ITER)){
             return make_pair(x2, Map_SEC);
         }
         x0 = x1;

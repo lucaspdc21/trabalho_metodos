@@ -18,7 +18,7 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
     double dx0 = derivative(x0,a);
     if (dx0 == 0){
       //se derivada == 0, metodo para. 
-      return make_pair(NULL, Map_NR_mod); 
+      return make_pair(-404.404404404, Map_NR_mod); 
     }
     Map_NR_mod.insert(
       pair<int, vector<double>>(iter, {x0, func(x0, a), dx0, x0}));
@@ -35,7 +35,7 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
         x = x0 - fx * Dx0; 
         double er = abs(x - x0) / abs(x0); // calculando o erro relativo
         Map_NR_mod.insert(pair<int, vector<double>>(iter, {x0, a, fx, dx0, er})); // inserindo esses valores no mapa
-        if ((abs(func(x,a)) < epsilon1) || (abs(x - x0) < epsilon2) || (iter >= iterMax) )
+        if ((abs(func(x,a)) < epsilon1) || (er < epsilon2) || (iter >= iterMax) )
                 return make_pair(x, Map_NR_mod);
         x0 = x; // se ainda não paramos, continuamos e atualizamos o valor de x0 para a nova raiz aproximada
     }}}
