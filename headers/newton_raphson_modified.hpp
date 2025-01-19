@@ -35,7 +35,7 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
         x = x0 - fx * Dx0; 
         double er = abs(x - x0) / abs(x0); // calculando o erro relativo
         Map_NR_mod.insert(pair<int, vector<double>>(iter, {x0, a, fx, dx0, er})); // inserindo esses valores no mapa
-        if ((abs(func(x,a)) < epsilon1) || (x-x0 > epsilon2) || (iter >= iterMax) )
+        if ((abs(func(x,a)) < epsilon1) || (abs(x - x0) < epsilon2) || (iter >= iterMax) )
                 return make_pair(x, Map_NR_mod);
         x0 = x; // se ainda não paramos, continuamos e atualizamos o valor de x0 para a nova raiz aproximada
     }}}

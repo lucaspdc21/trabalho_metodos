@@ -68,21 +68,21 @@ int main(int argc, char* argv[]) {
         pair<double, map<int, vector<double>>> nr = newton_raphson(func, derivative, x0, a, episilon1, episilon2);
         to_csv(nr, header_nr, "newton_raphson_a_" + std::to_string(a));
         // exibi os resultados individuais e armazena no vetor de comparações
-        printResults("Newton-Raphson", nr);
+        printResults("Newton-Raphson", a, nr);
         comparisons.push_back(Result("Newton-Raphson", a, nr.first, func(nr.first, a), abs(nr.first - x0), nr.second.size()));
 
         const char* header_nm = "iteração, x0, a, f(x), f'(x0), erro relativo \n";
         pair<double, map<int, vector<double>>> nm = newtonModified(func, derivative, x0, a, episilon1, episilon2);
         to_csv(nm, header_nm, "newton_raphson_modified_a_" + std::to_string(a));
 
-        printResults("Newton-Raphson Modificado", nm);
+        printResults("Newton-Raphson Modificado", a, nm);
         comparisons.push_back(Result("Newton-Raphson Modificado", a, nm.first, func(nm.first, a), abs(nm.first - x0), nm.second.size()));
 
         const char* header_sc = "iteração, x0, f(x0) , x1, f(x1), erro relativo \n";
         pair<double, map<int, vector<double>>> sc = secant(func, x0, x1, a, episilon1, episilon2);
         to_csv(sc, header_sc, "secant_a_" + std::to_string(a));
          
-        printResults("Secante", sc);
+        printResults("Secante", a, sc);
         comparisons.push_back(Result("Secante", a, sc.first, func(sc.first, a), abs(sc.first - x0), sc.second.size()));
     }
 
