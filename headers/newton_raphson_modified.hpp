@@ -13,7 +13,6 @@ pair<double, map<int, vector<double>>> newtonModified(double (*func) (double, do
                                                               double epsilon1,
                                                               double epsilon2)
 {   
-    std::cout << "newtonModified\n";
     map<int, vector<double>> Map_NR_mod;
     int iter = 0;
     double dx0 = derivative(x0,a);
